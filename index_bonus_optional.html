@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>UFO Finder</title>        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!--<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">-->
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js"></script>
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/style.css">        
+    </head>
+
+    <body>
+    <div class="wrapper">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">UFO Sightings
+                    <img class="nav-ufo" src="static/img/triangle_ufo_white.png">
+                </a>
+                </div>
+            </div>
+        </nav>
+        <div class="hero text-center">
+            <h1>UFO Sightings</h1>
+            <p>The Truth is Out There</p>            
+        </div>                
+
+        <div class="container">                
+            <div class="row margin-top-50">
+                <!-- Start FORM-->
+                <div class="col-md-2">
+                    <aside class="filters">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Filter Search</div>
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-group">
+                                        <ul class="list-group" id="filters">
+                                        <li class="filter list-group-item">
+                                            <label for="date">Enter a Date</label>
+                                            <input class="form-control" id="datetime-input" type="text" placeholder="mm/dd/yyyy">
+                                        </li>
+                                        
+                                        <li class="filter list-group-item">
+                                            <label for="date">Enter a Country</label>
+                                            <select id='country-input'>
+                                                    <option value="" selected disabled>Select Country</option>
+                                                    <option value="us">USA</option>
+                                                    <option value="ca">Canada</option>                                                    
+                                                </select>                                            
+                                        </li>
+                                        <li class="filter list-group-item">                                                
+                                            <label for="date">Enter a Shape</label>
+                                            <select id='shape-input'>
+                                                    <option value="" selected disabled>Select Shape</option>
+                                                    <option value="circle">Circle</option>
+                                                    <option value="triangle">Triangle</option>
+                                                    <option value="rectangle">Rectangle</option>
+                                                    <option value="sphere">Sphere</option> 
+                                                    <option value="disk">Disk</option>                                                       d
+                                                    <option value="cross">Cross</option>  
+                                                    <option value="circle">Circle</option> 
+                                                    <option value="oval">Oval</option>
+                                                    <option value="cylinder">Cylinder</option>
+                                                    <option value="flash">Flash</option>  
+                                                    <option value="light">Light</option>
+                                                    <option value="fireball">Fireball</option>
+                                                    <option value="formation">Formation</option>
+                                                    <option value="changing">Changing</option>
+                                                    <option value="chevron">Chevron</option>
+                                                    <option value="cigar">Cigar</option>
+                                                    <option value="teardrop">Teardrop</option>
+                                                    <option value="other">Other</option>
+                                                    <option value="unknown">Unknown</option>
+                                                </select>
+                                            <!-- <input class="form-control" id="shape-input" type="text" placeholder="Shape"> -->
+                                        </li>                                        
+                                        </ul>
+                                    </div>                                
+                                </form>                            
+                            </div>
+                            <button id="filter-btn" type="submit" class="btn btn-danger">Filter Table</button>
+                        </div>
+                    </aside>
+                </div> <!-- End class=col-md-2 FORM-->
+
+                <!-- Start TABLE -->
+                
+                <div class="col-md-10">                        
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6> UFO Sightings Table</h6>
+
+                            <div class="card-body">
+                                <div id="table-area" class="">
+                                    <table id="ufo-table" class="table table-striped">
+                                    <thead>
+                                        <tr class='table-dark'>
+                                        <th class="table-head">Date</th>
+                                        <th class="table-head">City</th>
+                                        <th class="table-head">State</th>
+                                        <th class="table-head">Country</th>
+                                        <th class="table-head">Shape</th>
+                                        <th class="table-head">Duration</th>
+                                        <th class="table-head">Comments</th>
+                                        </tr>
+                                    </thead>                        
+                                    <tbody></tbody>
+                                    </table>
+                                </div>
+
+                            </div> <!-- Card Body -->                
+                        </div> <!-- Card Header -->                
+                    </div> <!-- Card Shadow -->
+                    
+                    <div class="card shadow bg-info mb-4">
+                        <div class="card-header py-3">
+                            <h6 class='filter-results'> UFO Sightings Filtering Results</h6>
+                        </div>
+                    </div>                   
+                    
+                </div> <!-- End class=col-md-10 TABLE-->
+
+            </div> <!-- End class=row margin-top-50-->
+        </div> <!-- End class=container --> 
+
+        <footer class="footer">            
+            <span class="bottom">UFO Sightings</span>
+        </footer>
+
+    </div> <!-- End div class=wrapper -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>    
+    <script src="static/js/data.js"></script>
+    <script src="static/js/app_bonus_optional.js"></script>    
+
+    <!--
+    <audio id='spacecraft' controls autoplay>            
+            <source src="static/sounds/spacecraft.mp3" type="audio/mpeg">            
+    </audio>
+
+    <script type='text/javascript'>
+        window.onload = function() {            
+            document.getElementById('spacecraft').play();
+        }    
+        /*
+        document.getElementById('nav-ufo').addEventListener('click', function() {
+            document.getElementById('spacecraft').play();
+        }); */
+    </script>
+    -->             
+
+
+    </body>
+</html>
+
+
+
